@@ -3,4 +3,4 @@
 #define m1 10000
 #define m2 100000
 #define h pi/N
-#define tau 0.00000001
+#define tau 0.0004

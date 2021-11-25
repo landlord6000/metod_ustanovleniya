@@ -11,7 +11,7 @@ void swap(T *r, T *s){
 
 template<typename T>
 T f(T x){
-    return 9*sin(9*x);
+    return 9*sin(3*x);
 }
 
 template<typename T>
@@ -45,9 +45,9 @@ void uravnoveshivanie_launch(std::vector<T>& vec){
     const T tauDhh = tau/(h*h);
     std::vector<T> vec2(N+1);
     for(int m = 0; m < m1; ++m){
-        T x = 0.;
-        for(int i = 0; i < N+1; ++i){
-            vec2[i] = vec[i] + tauDhh*(vec[i-1] - 2*vec[i] + vec[i+1] + f(x));
+        T x = h;
+        for(int i = 1; i < N; ++i){
+            vec2[i] = vec[i] + tauDhh*(vec[i-1] - 2*vec[i] + vec[i+1]) + tau*f(x);
             x+=h;
         }
         swap(vec, vec2);
@@ -55,9 +55,9 @@ void uravnoveshivanie_launch(std::vector<T>& vec){
     file_output_csv(vec, "m1.csv");
 
     for(int m = m1; m < m2; ++m){
-        T x = 0.;
-        for(int i = 0; i < N+1; ++i){
-            vec2[i] = vec[i] + tauDhh*(vec[i-1] - 2*vec[i] + vec[i+1] + f(x));
+        T x = h;
+        for(int i = 1; i < N; ++i){
+            vec2[i] = vec[i] + tauDhh*(vec[i-1] - 2*vec[i] + vec[i+1]) + tau*f(x);
             x+=h;
         }
         swap(vec, vec2);
